@@ -1,0 +1,23 @@
+- is_playing = mpd('playing?')
+
+%section
+  %form{ :method => "post", :action => "/mpd/control"}
+    %input{ :type => "hidden", :name => "command", :value => is_playing ? 'stop' : 'play'}
+    %input{ :type => "submit", :value => is_playing ? 'Stop' : 'Play' }
+
+  %form{ :method => "post", :action => "/mpd/control"}
+    %input{ :type => "hidden", :name => "command", :value => 'prev'}
+    %input{ :type => "submit", :value => "prev" }
+
+  %form{ :method => "post", :action => "/mpd/control"}
+    %input{ :type => "hidden", :name => "command", :value => "next" }
+    %input{ :type => "submit", :value => "Next" }
+
+%br.clear
+
+%section
+  %ul.song-info
+    - @song_info.each_with_index do |(key,val), i|
+      %li{ :class => ((i%2)==0 ? 'even' : nil) }
+        %strong= key
+        = val
