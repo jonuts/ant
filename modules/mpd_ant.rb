@@ -4,10 +4,11 @@ Ant.register(:mpd) do
   require 'librmpd'
 
   def MPD.my_server
-    @__my_server__ ||= new('localhost', 6600)
+    host = ENV['MPD_HOST'] || 'localhost'
+    @__my_server__ ||= new(host, 6600)
   end
 
-  namespace "/mpd" do
+  namespace '/mpd' do
     helpers do
       def mpd(*commands)
         server = MPD.my_server

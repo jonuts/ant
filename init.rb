@@ -12,6 +12,7 @@ module Ant
     attr_reader :mods
 
     def register(name)
+      return nil if @mods.find {|m| m == name}
       @mods << name
       yield if block_given?
     end
